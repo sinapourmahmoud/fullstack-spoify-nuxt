@@ -5,10 +5,8 @@
       <ArtistsList />
       <IndexBody />
     </div>
-    <div
-      class="col-span-4 md:col-span-1 bg-red-500 h-full md:py-0 md:static md:top-0"
-    >
-      ss
+    <div class="col-span-4 md:col-span-1 h-full md:py-0 md:static md:top-0">
+      <SidebarRight />
     </div>
   </div>
 </template>
