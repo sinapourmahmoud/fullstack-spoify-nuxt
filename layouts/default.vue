@@ -1,8 +1,8 @@
 <template>
-  <div
-    class="md:pt-6 grid grid-cols-5 h-screen overflow-y-auto bg-[#f8f8f8ec] gap-4"
-  >
+  <div class="md:pt-6 pt-3 grid grid-cols-5 h-screen bg-[#f8f8f8ec] gap-4">
     <Sidebar />
-    <slot></slot>
+    <div class="col-span-4 h-full overflow-auto">
+      <slot></slot>
+    </div>
   </div>
 </template>
