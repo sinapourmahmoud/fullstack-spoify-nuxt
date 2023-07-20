@@ -1,7 +1,7 @@
 <template>
   <div class="md:pt-6 pt-3 grid grid-cols-5 h-screen bg-[#f8f8f8ec] gap-4">
     <Sidebar />
-    <div class="col-span-4 h-full overflow-auto">
+    <div class="col-span-4 h-full overflow-y-auto">
       <slot></slot>
     </div>
   </div>

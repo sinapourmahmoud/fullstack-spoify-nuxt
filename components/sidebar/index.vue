@@ -1,5 +1,5 @@
 <template>
-  <aside class="col-span-1 h-full py-3 md:py-0">
+  <aside class="col-span-1 h-full py-3 md:py-0 static top-0">
     <div class="flex flex-col gap-14 md:px-9">
       <div class="flex items-center justify-center gap-2">
         <div class="w-1 h-2 bg-black rounded-full hidden lg:block"></div>
