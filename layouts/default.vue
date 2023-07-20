@@ -4,5 +4,6 @@
     <div class="col-span-4 h-full overflow-y-auto pr-3 md:pr-0">
       <slot></slot>
     </div>
+    <MusicBar />
   </div>
 </template>

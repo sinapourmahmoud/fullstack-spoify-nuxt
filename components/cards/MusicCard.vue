@@ -12,7 +12,7 @@
       <p class="text-xl font-medium">Title</p>
     </div>
 
-    <PlayButton :isPlaying="isPlaying" @clicked="handlePlayPause" />
+    <PlayButton :isPlaying="isPlaying" @clicked="handlePlayPause" small />
   </div>
 </template>
 <script setup lang="ts">
