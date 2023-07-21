@@ -1,6 +1,9 @@
 <template>
   <div>
-    <ModalTitle title="Wellcome Back" subtitle="Login to your account" />
+    <ModalTitle
+      title="Wellcome to Spotify"
+      subtitle="Register to your account"
+    />
     <div class="my-5">
       <Button title="Login with Google!" type="button" border small>
         <svg
@@ -36,15 +39,12 @@
       <Button type="submit" title="Login" :disabled="loading" secondry></Button>
     </FormKit>
     <div class="flex flex-col gap-2 mt-3 items-center">
-      <a href="#" class="underline text-blue-500 font-normal text-sm">
-        Forget Password ?
-      </a>
       <a
         href="#"
-        @click="modalType = 'register'"
+        @click="modalType = 'login'"
         class="underline text-blue-500 font-normal text-sm"
       >
-        Dont have a account ? Register</a
+        Already have a account ? Login</a
       >
     </div>
   </div>

@@ -7,6 +7,7 @@
     <MusicBar />
     <Modal>
       <ModalLogin v-if="modalType === 'login'" />
+      <ModalRegister v-if="modalType === 'register'" />
     </Modal>
   </div>
 </template>

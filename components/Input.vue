@@ -9,7 +9,7 @@
     :label="label"
     :placeholder="props.placeholder"
     message=" text-red-500 mb-1 text-xs max-w-xs"
-    input-class="min-w-[100%] peer   outline-none mt-2  h-10 px-3 p-6 text-base text-gray-700  rounded-lg border border-gray-400 "
+    input-class=" min-w-[100%] peer   outline-none mt-2  h-10 px-3 p-6 text-base text-gray-700  rounded-lg border border-gray-400 focus:border-blue-500"
   />
 </template>
 <script lang="ts" setup>
