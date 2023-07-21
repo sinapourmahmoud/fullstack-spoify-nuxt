@@ -22,8 +22,8 @@
 import { PauseIcon, PlayIcon } from "@heroicons/vue/24/solid";
 
 interface Props {
-  isPlaying: boolean | false;
-  small: boolean | false;
+  isPlaying?: boolean | false;
+  small?: boolean | false;
 }
 
 let { isPlaying, small } = defineProps<Props>();

@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-between flex-col md:flex-row gap-3">
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2" v-if="false">
       <img
         src="./../assets//placeholder.jpg"
         alt="profile"
@@ -10,6 +10,20 @@
         Good Morning ,
         <strong class="text-2xl font-medium text-black">Sina</strong>
       </h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <button
+        @click="openModal('register')"
+        class="bg-white rounded-3xl py-2 px-3 shadow-lg text-sm font-medium shadow-slate-300 transition-all duration-300 hover:shadow-sm"
+      >
+        Register
+      </button>
+      <button
+        @click="openModal('login')"
+        class="bg-white rounded-3xl py-2 px-3 shadow-lg text-sm font-medium shadow-slate-300 transition-all duration-300 hover:shadow-sm"
+      >
+        Login
+      </button>
     </div>
     <div class="flex-1 flex justify-end">
       <form class="flex items-center gap-3 flex-1 justify-end">
@@ -41,4 +55,11 @@ import {
   MagnifyingGlassIcon,
   AdjustmentsHorizontalIcon,
 } from "@heroicons/vue/24/outline";
+
+let { toggleModal, modalType } = useModal();
+
+const openModal = (provider: string) => {
+  toggleModal.value = true;
+  modalType.value = provider;
+};
 </script>
