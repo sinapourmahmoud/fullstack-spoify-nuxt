@@ -5,7 +5,13 @@
       subtitle="Register to your account"
     />
     <div class="my-5">
-      <Button title="Login with Google!" type="button" border small>
+      <Button
+        title="Login with Google!"
+        type="button"
+        border
+        small
+        @clicked="loginGoogle"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="1em"
@@ -36,7 +42,12 @@
         validation="required|password|length:5,255"
         placeholder="Enter Password"
       />
-      <Button type="submit" title="Login" :disabled="loading" secondry></Button>
+      <Button
+        type="submit"
+        title="Register"
+        :disabled="loading"
+        secondry
+      ></Button>
     </FormKit>
     <div class="flex flex-col gap-2 mt-3 items-center">
       <a
@@ -52,10 +63,11 @@
 
 <script setup lang="ts">
 let { toggleModal, modalType } = useModal();
+let { loginGoogle } = useAuth();
 
 let loading = ref(false);
 
 const handleSubmit = (event: any) => {
-  console.log(event);
+  console.log("salam");
 };
 </script>

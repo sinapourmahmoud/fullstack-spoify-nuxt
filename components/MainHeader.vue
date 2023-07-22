@@ -24,6 +24,7 @@
       >
         Login
       </button>
+      <button @click="logout">logout</button>
     </div>
     <div class="flex-1 flex justify-end">
       <form class="flex items-center gap-3 flex-1 justify-end">
@@ -58,8 +59,16 @@ import {
 
 let { toggleModal, modalType } = useModal();
 
+const user = useSupabaseUser();
+const client = useSupabaseAuthClient();
+
 const openModal = (provider: string) => {
   toggleModal.value = true;
   modalType.value = provider;
+};
+
+const logout = async () => {
+  let { error } = await client.auth.signOut();
+  console.log(error);
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
   <button
+    @click="$emit('clicked')"
     :type="type"
     :class="`${small ? 'py-2' : 'py-3'} ${
       secondry
@@ -28,4 +29,7 @@ interface Props {
 
 let { type, title, border, small, secondry, rounded, disabled } =
   defineProps<Props>();
+let emit = defineEmits<{
+  (event: "clicked"): void;
+}>();
 </script>

@@ -2,7 +2,13 @@
   <div>
     <ModalTitle title="Wellcome Back" subtitle="Login to your account" />
     <div class="my-5">
-      <Button title="Login with Google!" type="button" border small>
+      <Button
+        title="Login with Google!"
+        type="button"
+        border
+        small
+        @clicked="loginGoogle"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="1em"
@@ -52,6 +58,8 @@
 
 <script setup lang="ts">
 let { toggleModal, modalType } = useModal();
+
+let { loginGoogle } = useAuth();
 
 let loading = ref(false);
 
