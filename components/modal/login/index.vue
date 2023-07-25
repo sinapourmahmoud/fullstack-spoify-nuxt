@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div
+    :aria-disabled="loading"
+    :class="loading && 'pointer-events-none opacity-75'"
+  >
     <ModalTitle title="Wellcome Back" subtitle="Login to your account" />
     <div class="my-5">
       <Button
@@ -42,9 +45,9 @@
       <Button type="submit" title="Login" :disabled="loading" secondry></Button>
     </FormKit>
     <div class="flex flex-col gap-2 mt-3 items-center">
-      <a href="#" class="underline text-blue-500 font-normal text-sm">
+      <NuxtLink to="/" class="underline text-blue-500 font-normal text-sm">
         Forget Password ?
-      </a>
+      </NuxtLink>
       <a
         href="#"
         @click="modalType = 'register'"
@@ -59,11 +62,15 @@
 <script setup lang="ts">
 let { toggleModal, modalType } = useModal();
 
-let { loginGoogle } = useAuth();
+let { loginGoogle, login, useUser } = useAuth();
 
 let loading = ref(false);
 
-const handleSubmit = (event: any) => {
-  console.log(event);
+const handleSubmit = async (event: any) => {
+  loading.value = true;
+  await login({ email: event.email, password: event.password });
+  loading.value = false;
+
+  toggleModal.value = false;
 };
 </script>

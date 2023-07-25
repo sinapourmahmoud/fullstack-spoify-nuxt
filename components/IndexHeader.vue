@@ -11,7 +11,7 @@
         <strong class="text-2xl font-medium text-black">Sina</strong>
       </h1>
     </div>
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2" v-if="!useUser">
       <button
         @click="openModal('register')"
         class="bg-white rounded-3xl py-2 px-3 shadow-lg text-sm font-medium shadow-slate-300 transition-all duration-300 hover:shadow-sm"
@@ -25,6 +25,25 @@
         Login
       </button>
       <button @click="logout">logout</button>
+    </div>
+    <div v-else class="flex items-center gap-3">
+      <img
+        src="./../assets/placeholder.jpg"
+        class="w-12 h-12 rounded-full object-cover"
+        alt="profile"
+      />
+      <p class="text-lg font-medium">
+        Have a good time ,
+        <span class="text-xl font-semibold">{{
+          useUser?.email.split("@")[0]
+        }}</span>
+      </p>
+      <button
+        @click="openModal('addSong')"
+        class="bg-white rounded-3xl py-2 px-3 shadow-lg text-sm font-medium shadow-slate-300 transition-all duration-300 hover:shadow-sm"
+      >
+        Add Song
+      </button>
     </div>
     <div class="flex-1 flex justify-end">
       <form class="flex items-center gap-3 flex-1 justify-end">
@@ -51,13 +70,14 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import {
   MagnifyingGlassIcon,
   AdjustmentsHorizontalIcon,
 } from "@heroicons/vue/24/outline";
 
 let { toggleModal, modalType } = useModal();
+let { useUser } = useAuth();
 
 const user = useSupabaseUser();
 const client = useSupabaseAuthClient();

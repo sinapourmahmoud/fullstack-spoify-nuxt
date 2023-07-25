@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-4 gap-4">
     <div class="min-h-screen flex flex-col gap-8 col-span-4 md:col-span-3">
-      <MainHeader />
+      <IndexHeader />
       <ArtistsList />
       <IndexBody />
     </div>
@@ -10,3 +10,8 @@
     </div>
   </div>
 </template>
+<script setup lang="ts">
+definePageMeta({
+  layout: "custom",
+});
+</script>

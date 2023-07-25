@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div
+    :aria-disabled="loading"
+    :class="loading ? 'opacity-80 pointer-events-none' : ''"
+  >
     <ModalTitle
       title="Wellcome to Spotify"
       subtitle="Register to your account"
@@ -10,6 +13,7 @@
         type="button"
         border
         small
+        :disabled="loading"
         @clicked="loginGoogle"
       >
         <svg
@@ -42,12 +46,7 @@
         validation="required|password|length:5,255"
         placeholder="Enter Password"
       />
-      <Button
-        type="submit"
-        title="Register"
-        :disabled="loading"
-        secondry
-      ></Button>
+      <Button type="submit" title="Register" :disabled="loading" secondry />
     </FormKit>
     <div class="flex flex-col gap-2 mt-3 items-center">
       <a
@@ -63,11 +62,16 @@
 
 <script setup lang="ts">
 let { toggleModal, modalType } = useModal();
-let { loginGoogle } = useAuth();
+let { loginGoogle, register } = useAuth();
 
 let loading = ref(false);
 
-const handleSubmit = (event: any) => {
-  console.log("salam");
+const handleSubmit = async (event: any) => {
+  loading.value = true;
+  try {
+    await register({ email: event.email, password: event.password });
+    toggleModal.value = false;
+    loading.value = false;
+  } catch (err: any) {}
 };
 </script>
