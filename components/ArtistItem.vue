@@ -1,18 +1,25 @@
 <template>
-  <div class="cursor-pointer aspect-square flex items-center flex-col gap-2">
+  <div class="cursor-pointer flex items-center flex-col gap-2">
     <img
-      :src="image ? image : './../assets/placeholder.jpg'"
-      class="w-12 h-w-12 object-cover rounded-full"
+      :src="
+        getUrl(option?.image_path, 'profiles')
+          ? getUrl(option?.image_path, 'profiles')
+          : './../assets/placeholder.jpg'
+      "
+      class="w-12 h-12 object-cover rounded-full"
       alt="profile"
     />
-    <p class="text-gray-500">{{ name }}</p>
+    <p class="text-gray-500">{{ option?.label }}</p>
   </div>
 </template>
 <script setup lang="ts">
+import { Options } from "types";
+
 interface Props {
-  name: string;
-  image?: string;
+  option: Options;
 }
 
-let { image, name } = defineProps<Props>();
+let { option } = defineProps<Props>();
+
+let { getUrl } = useGet();
 </script>

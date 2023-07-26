@@ -8,12 +8,23 @@
 
       <div class="flex flex-col gap-4">
         <CardsAlbumCard title="After houres" />
-        <CardsAlbumCard title="After houres" />
-        <CardsAlbumCard title="After houres" />
       </div>
     </div>
-    <div class="md:col-span-4 col-span-6">
-      <CardsMusicCard />
+    <div class="md:col-span-4 col-span-6 flex flex-col gap-4">
+      <CardsMusicCard
+        v-for="(song, index) in songs"
+        :key="index"
+        :song="song"
+      />
     </div>
   </div>
 </template>
+<script setup lang="ts">
+import { Song } from "types";
+
+interface Props {
+  songs: Song[];
+}
+
+let { songs } = defineProps<Props>();
+</script>

@@ -5,17 +5,11 @@
       artists
     </h1>
     <div class="flex items-center gap-5 flex-wrap">
-      <ArtistItem name="Sina" />
-      <ArtistItem name="Sina" />
-      <ArtistItem name="Sina" />
-      <ArtistItem name="Sina" />
-      <ArtistItem name="Sina" />
-      <ArtistItem name="Sina" />
-      <ArtistItem name="Sina" />
-      <ArtistItem name="Sina" />
-      <ArtistItem name="Sina" />
-      <ArtistItem name="Sina" />
-      <ArtistItem name="Sina" />
+      <ArtistItem
+        v-for="(option, index) in useOptions"
+        :key="index"
+        :option="option"
+      />
       <div
         class="aspect-square flex cursor-pointer flex-col gap-2 items-center"
       >
@@ -29,3 +23,8 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+let { useOptions } = useGet();
+console.log("lists", useOptions.value);
+</script>
