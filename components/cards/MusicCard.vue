@@ -14,7 +14,11 @@
       <p class="text-xl font-medium">{{ song?.title }}</p>
     </div>
 
-    <PlayButton :isPlaying="isPlaying" @clicked="handlePlayPause" small />
+    <PlayButton
+      :isPlaying="activeSong?.id === song.id && isPlaying"
+      small
+      @clicked="handlePlayPause"
+    />
   </div>
 </template>
 <script setup lang="ts">
@@ -25,13 +29,21 @@ interface Props {
 }
 
 let { song } = defineProps<Props>();
-console.log(song);
 
 let { getUrl } = useGet();
-
-let isPlaying = ref(false);
+let { selectSong, pauseSong, activeSong, isPlaying, playSong } = useSong();
+let { useSongs } = useGet();
 
 const handlePlayPause = () => {
-  isPlaying.value = !isPlaying.value;
+  if (activeSong?.value?.id === song.id && isPlaying.value) {
+    pauseSong();
+  } else if (activeSong?.value?.id === song.id && isPlaying.value) {
+    playSong();
+  } else {
+    selectSong(useSongs.value, {
+      ...song,
+      songUrl: getUrl(song.storage_path, "songs"),
+    });
+  }
 };
 </script>

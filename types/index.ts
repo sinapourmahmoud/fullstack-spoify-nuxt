@@ -22,4 +22,9 @@ export type Song = {
   title: string;
   user_id: string;
   artists: Artist;
+  songUrl?: string;
 };
+
+// export type PlayListSong = Song & {
+//   songUrl:string
+// };
