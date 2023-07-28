@@ -1,11 +1,11 @@
 import uniqid from "uniqid";
 
-import { Options } from "types";
+import { Favorites, Options } from "types";
 
 export default () => {
   let client = useSupabaseAuthClient();
   let { useUser } = useAuth();
-  let { useOptions } = useGet();
+  let { useOptions, useFavorites } = useGet();
   const submitSong = async ({
     image,
     audio,
@@ -108,6 +108,22 @@ export default () => {
       console.log(err.message);
     }
   };
+  const addFavorites = async (id: string) => {
+    let findFavorite = useFavorites.value.some(
+      (item: Favorites) => item.song_id === id
+    );
+    if (findFavorite) {
+      const { error } = await client
+        .from("favorites")
+        .delete()
+        .eq("song_id", id);
+    } else {
+      const { data, error } = await client
+        .from("favorites")
+        .insert([{ song_id: id, user_id: useUser.value.id }])
+        .select();
+    }
+  };
 
-  return { submitSong };
+  return { submitSong, addFavorites };
 };

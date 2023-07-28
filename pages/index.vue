@@ -39,6 +39,5 @@ onMounted(async () => {
       }
     )
     .subscribe();
-  console.log(useSongs.value);
 });
 </script>

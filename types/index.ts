@@ -25,6 +25,13 @@ export type Song = {
   songUrl?: string;
 };
 
+export type Favorites = {
+  created_at: string;
+  id: string;
+  user_id: string;
+  song_id: string;
+};
+
 // export type PlayListSong = Song & {
 //   songUrl:string
 // };

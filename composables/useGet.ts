@@ -1,8 +1,11 @@
-import { Options, Song } from "types";
+import { Favorites, Options, Song } from "types";
 
 export default () => {
+  let { useUser } = useAuth();
+
   let useOptions = useState<Options[]>("useOptions", () => []);
   let useSongs = useState<Song[]>("useSongs", () => []);
+  let useFavorites = useState<Favorites[]>("useFavorites", () => []);
   let client = useSupabaseClient();
 
   const getSongs = async () => {
@@ -12,7 +15,7 @@ export default () => {
       *
     )
     `);
-    useSongs.value = songs;
+    useSongs.value = songs as Song[];
   };
 
   const getArtists = async () => {
@@ -41,8 +44,19 @@ export default () => {
     return data.publicUrl;
   };
 
+  const getFavorites = async () => {
+    let { data, error } = await client
+      .from("favorites")
+      .select("*")
+      .eq("user_id", useUser?.value?.id);
+    console.log("favorites", data);
+    useFavorites.value = data as Favorites[];
+  };
+
   return {
     getArtists,
+    useFavorites,
+    getFavorites,
     getUrl,
     useOptions,
     useSongs,

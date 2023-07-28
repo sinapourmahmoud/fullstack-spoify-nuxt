@@ -6,7 +6,7 @@ export default () => {
   let playList = useState<Song[]>("playList", () => []);
   let activeSong = useState<null | Song>("activeSong", () => null);
   let isPlaying = useState<boolean>("isPlaying", () => false);
-
+  let volume = useState<number>("volume", () => 1);
   const selectSong = (songsList: Song[], item: Song) => {
     isPlaying.value = false;
 
@@ -59,5 +59,6 @@ export default () => {
     selectSong,
     isPlaying,
     playSong,
+    volume,
   };
 };

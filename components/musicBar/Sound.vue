@@ -12,10 +12,24 @@
         d="M14 8.83v6.34L11.83 13H9v-2h2.83L14 8.83M16 4l-5 5H7v6h4l5 5V4z"
       ></path>
     </svg>
-    <div class="relative w-20 h-[5px] bg-blue-200 rounded-3xl cursor-pointer">
-      <div
-        class="relative w-[50%] h-full bg-blue-500 inset-y-0 left-0 rounded-3xl"
-      ></div>
-    </div>
+
+    <input
+      id="default-range"
+      type="range"
+      value="1"
+      min="0"
+      max="1"
+      step="0.1"
+      class="w-[50%] h-1 bg-gray-200 rounded-full appearance-none cursor-pointer"
+      @change="handleChange"
+    />
   </div>
 </template>
+
+<script setup lang="ts">
+let { volume } = useSong();
+
+const handleChange = (e: any) => {
+  volume.value = +e.target.value;
+};
+</script>

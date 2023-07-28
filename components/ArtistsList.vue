@@ -26,5 +26,4 @@
 
 <script setup lang="ts">
 let { useOptions } = useGet();
-console.log("lists", useOptions.value);
 </script>

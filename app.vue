@@ -18,7 +18,6 @@ const client = useSupabaseAuthClient();
 onMounted(() => {
   client.auth.onAuthStateChange((event: any, session: any) => {
     useUser.value = session?.user;
-    console.log(session?.user);
   });
 });
 const handleclick = async () => {

@@ -5,7 +5,6 @@ export default () => {
     let { data, error } = await client.auth.signInWithOAuth({
       provider: "google",
     });
-    console.log(data);
   };
 
   const register = async ({
@@ -35,7 +34,6 @@ export default () => {
       email: email,
       password: password,
     });
-    console.log(data);
     if (error) {
       alert("something went wrong");
     }
@@ -55,7 +53,6 @@ export default () => {
     const { data, error } = await client.auth.updateUser({
       password,
     });
-    console.log(error, data);
   };
   return {
     updatePassword,
