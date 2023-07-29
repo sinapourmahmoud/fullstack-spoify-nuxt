@@ -42,31 +42,14 @@ let { selectSong, pauseSong, activeSong, isPlaying, playSong } = useSong();
 
 let { addFavorites } = useAddItem();
 
-let { useSongs, getFavorites, useFavorites } = useGet();
+let { useSongs, useFavorites, getFavorites, onSubscribeFavorites } = useGet();
 
 let client = useSupabaseAuthClient();
 
 onMounted(async () => {
   await getFavorites();
 
-  const favorites = client
-    .channel("custom-all-channel")
-    .on(
-      "postgres_changes",
-      { event: "*", schema: "public", table: "favorites" },
-      (payload) => {
-        if (payload?.old) {
-          useFavorites.value = useFavorites.value.filter(
-            (item: Favorites) => item.id !== payload.old?.id
-          );
-        } else {
-          useFavorites.value.push({
-            ...(payload.new as Favorites),
-          });
-        }
-      }
-    )
-    .subscribe();
+  onSubscribeFavorites();
 });
 
 const handlePlayPause = () => {
@@ -87,6 +70,8 @@ const handleClick = async () => {
 };
 
 let isFavorite = computed(() => {
-  return useFavorites.value.some((item: Favorites) => item.song_id === song.id);
+  return useFavorites.value?.some(
+    (item: Favorites) => item.song_id === song.id
+  );
 });
 </script>

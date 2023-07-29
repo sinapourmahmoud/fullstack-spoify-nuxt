@@ -109,19 +109,21 @@ export default () => {
     }
   };
   const addFavorites = async (id: string) => {
-    let findFavorite = useFavorites.value.some(
+    let findFavorite = useFavorites.value?.some(
       (item: Favorites) => item.song_id === id
     );
     if (findFavorite) {
-      const { error } = await client
+      const { data, error } = await client
         .from("favorites")
         .delete()
         .eq("song_id", id);
+      console.log(data);
     } else {
       const { data, error } = await client
         .from("favorites")
         .insert([{ song_id: id, user_id: useUser.value.id }])
         .select();
+      console.log(data);
     }
   };
 

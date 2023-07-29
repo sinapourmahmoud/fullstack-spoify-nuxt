@@ -20,11 +20,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import { Song } from "types";
+import { Favorites, Song } from "types";
 
 interface Props {
   songs: Song[];
 }
 
 let { songs } = defineProps<Props>();
+
+let client = useSupabaseAuthClient();
 </script>

@@ -41,7 +41,7 @@ onMounted(async () => {
       { event: "*", schema: "public", table: "favorites" },
       (payload: any) => {
         if (payload?.old) {
-          useFavorites.value = useFavorites.value.filter(
+          useFavorites.value = useFavorites.value?.filter(
             (item: Favorites) => item.id !== payload.old?.id
           );
         } else {
@@ -54,7 +54,7 @@ onMounted(async () => {
     .subscribe();
 });
 let isFavorite = computed(() => {
-  return useFavorites.value.some(
+  return useFavorites.value?.some(
     (item: Favorites) => item.song_id === activeSong.value?.id
   );
 });

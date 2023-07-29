@@ -50,10 +50,34 @@ export default () => {
       .select("*")
       .eq("user_id", useUser?.value?.id);
     console.log("favorites", data);
-    useFavorites.value = data as Favorites[];
+    console.log(useUser.value);
+    useFavorites.value = (data as Favorites[]) || [];
+  };
+  const onSubscribeFavorites = () => {
+    const favorites = client
+      .channel("custom-all-channel")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "favorites" },
+        (payload) => {
+          console.log(payload);
+          if (payload?.old) {
+            useFavorites.value = useFavorites.value?.filter(
+              (item: Favorites) => item.id !== payload.old?.id
+            );
+          } else {
+            useFavorites.value = [
+              ...useFavorites.value,
+              { ...(payload.new as Favorites) },
+            ];
+          }
+        }
+      )
+      .subscribe();
   };
 
   return {
+    onSubscribeFavorites,
     getArtists,
     useFavorites,
     getFavorites,
