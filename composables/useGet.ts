@@ -48,7 +48,16 @@ export default () => {
   const getFavorites = async () => {
     let { data, error } = await client
       .from("favorites")
-      .select("*")
+      .select(
+        `*,
+      songs(
+        *,
+        artists(
+          *
+        )
+      )
+      `
+      )
       .eq("user_id", useUser?.value?.id);
     console.log("favorites", data);
     console.log(useUser.value);

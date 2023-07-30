@@ -15,6 +15,7 @@
         v-for="(song, index) in songs"
         :key="index"
         :song="song"
+        :songList="songs"
       />
     </div>
   </div>

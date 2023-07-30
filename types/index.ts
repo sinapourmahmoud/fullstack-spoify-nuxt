@@ -30,6 +30,7 @@ export type Favorites = {
   id: string;
   user_id: string;
   song_id: string;
+  songs: Song;
 };
 
 // export type PlayListSong = Song & {

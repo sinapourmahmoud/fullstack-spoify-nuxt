@@ -33,9 +33,10 @@ import { Favorites, Song } from "types";
 
 interface Props {
   song: Song;
+  songList: Song[];
 }
 
-let { song } = defineProps<Props>();
+let { song, songList } = defineProps<Props>();
 
 let { getUrl } = useGet();
 let { selectSong, pauseSong, activeSong, isPlaying, playSong } = useSong();
@@ -48,6 +49,7 @@ let client = useSupabaseAuthClient();
 
 onMounted(async () => {
   await getFavorites();
+  await getFavorites();
 
   onSubscribeFavorites();
 });
@@ -58,7 +60,7 @@ const handlePlayPause = () => {
   } else if (activeSong?.value?.id === song.id && isPlaying.value) {
     playSong();
   } else {
-    selectSong(useSongs.value, {
+    selectSong(songList, {
       ...song,
       songUrl: getUrl(song.storage_path, "songs"),
     });

@@ -24,10 +24,14 @@
             :class="fullPath === '/search' ? 'text-black' : 'text-gray-500'"
           />
         </SidebarItem>
-        <SidebarItem title="Favorites" :isActive="fullPath === '/'" path="/">
+        <SidebarItem
+          title="Favorites"
+          :isActive="fullPath === '/favorites'"
+          path="/favorites"
+        >
           <HeartIcon
             class="w-5 transition-all duration-300 group-hover:text-black"
-            :class="fullPath === '/' ? 'text-black' : 'text-gray-500'"
+            :class="fullPath === '/favorites' ? 'text-black' : 'text-gray-500'"
           />
         </SidebarItem>
       </div>

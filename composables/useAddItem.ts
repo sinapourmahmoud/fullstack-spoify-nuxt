@@ -110,7 +110,7 @@ export default () => {
   };
   const addFavorites = async (id: string) => {
     let findFavorite = useFavorites.value?.some(
-      (item: Favorites) => item.song_id === id
+      (item: Favorites) => item?.song_id === id
     );
     if (findFavorite) {
       const { data, error } = await client
@@ -121,7 +121,7 @@ export default () => {
     } else {
       const { data, error } = await client
         .from("favorites")
-        .insert([{ song_id: id, user_id: useUser.value.id }])
+        .insert([{ song_id: id, user_id: useUser.value?.id }])
         .select();
       console.log(data);
     }
