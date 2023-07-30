@@ -5,6 +5,7 @@ export default () => {
 
   let useOptions = useState<Options[]>("useOptions", () => []);
   let useSongs = useState<Song[]>("useSongs", () => []);
+  let useSearchResault = useState<Song[]>("useSearchResault", () => []);
   let useFavorites = useState<Favorites[]>("useFavorites", () => []);
   let client = useSupabaseClient();
 
@@ -76,8 +77,35 @@ export default () => {
       .subscribe();
   };
 
+  const getSearchResault = async (title?: string) => {
+    if (title) {
+      let { data: songs, error } = await client
+        .from("songs")
+        .select(
+          `
+    *,
+    artists(
+      *
+    )
+    `
+        )
+        .textSearch("title", title);
+      useSearchResault.value = songs as Song[];
+    } else {
+      let { data: songs, error } = await client.from("songs").select(`
+    *,
+    artists(
+      *
+    )
+    `);
+      useSearchResault.value = songs as Song[];
+    }
+  };
+
   return {
     onSubscribeFavorites,
+    useSearchResault,
+    getSearchResault,
     getArtists,
     useFavorites,
     getFavorites,

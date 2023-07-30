@@ -8,22 +8,26 @@
         <h2 class="text-2xl font-bold">Wave .</h2>
       </div>
       <div class="flex flex-col items-center gap-5">
-        <SidebarItem title="Hello" path="/" v-slot="slotProps">
+        <SidebarItem title="Hello" :isActive="fullPath === '/'" path="/">
           <HomeIcon
             class="w-5 transition-all duration-300 group-hover:text-black"
-            :class="slotProps.isActive ? 'text-black' : 'text-gray-500'"
+            :class="fullPath === '/' ? 'text-black' : 'text-gray-500'"
           />
         </SidebarItem>
-        <SidebarItem title="Explore" v-slot="slotProps">
+        <SidebarItem
+          title="Explore"
+          :isActive="fullPath === '/search'"
+          path="/search"
+        >
           <MagnifyingGlassIcon
             class="w-5 transition-all duration-300 group-hover:text-black"
-            :class="slotProps.isActive ? 'text-black' : 'text-gray-500'"
+            :class="fullPath === '/search' ? 'text-black' : 'text-gray-500'"
           />
         </SidebarItem>
-        <SidebarItem title="Favorites" v-slot="slotProps">
+        <SidebarItem title="Favorites" :isActive="fullPath === '/'" path="/">
           <HeartIcon
             class="w-5 transition-all duration-300 group-hover:text-black"
-            :class="slotProps.isActive ? 'text-black' : 'text-gray-500'"
+            :class="fullPath === '/' ? 'text-black' : 'text-gray-500'"
           />
         </SidebarItem>
       </div>
@@ -37,4 +41,13 @@ import {
   MagnifyingGlassIcon,
   HeartIcon,
 } from "@heroicons/vue/24/outline";
+
+let fullPath = ref(useRoute().fullPath);
+
+watch(
+  () => useRoute().fullPath,
+  (newVal) => {
+    fullPath.value = newVal;
+  }
+);
 </script>
