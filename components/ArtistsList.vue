@@ -6,9 +6,9 @@
     </h1>
     <div class="flex items-center gap-5 flex-wrap">
       <ArtistItem
-        v-for="(option, index) in useOptions"
+        v-for="(singer, index) in useSingers"
         :key="index"
-        :option="option"
+        :option="singer"
       />
       <div
         class="aspect-square flex cursor-pointer flex-col gap-2 items-center"
@@ -25,5 +25,6 @@
 </template>
 
 <script setup lang="ts">
-let { useOptions } = useGet();
+let { getSingers, useSingers } = useGet();
+getSingers();
 </script>

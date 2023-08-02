@@ -8,6 +8,7 @@ export default () => {
   let isPlaying = useState<boolean>("isPlaying", () => false);
   let volume = useState<number>("volume", () => 1);
   const selectSong = (songsList: Song[], item: Song) => {
+    console.log(songsList);
     isPlaying.value = false;
 
     playList.value = songsList;
@@ -18,7 +19,6 @@ export default () => {
   };
 
   const nextSong = (item: Song | null) => {
-    isPlaying.value = false;
     let index: number = playList.value?.findIndex(
       (element: Song) => item?.id === element.id
     );
@@ -28,10 +28,9 @@ export default () => {
     } else {
       activeSong.value = playList.value[index + 1];
     }
-    isPlaying.value = true;
+    activeSong.value.songUrl = `https://grcenhalnznrwvbggsyc.supabase.co/storage/v1/object/public/songs/public/${activeSong.value.storage_path}`;
   };
   const prevSong = (item: Song | null) => {
-    isPlaying.value = false;
     let index: number = playList.value?.findIndex(
       (element: Song) => item?.id === element.id
     );
@@ -41,7 +40,7 @@ export default () => {
     } else {
       activeSong.value = playList.value[index - 1];
     }
-    isPlaying.value = true;
+    activeSong.value.songUrl = `https://grcenhalnznrwvbggsyc.supabase.co/storage/v1/object/public/songs/public/${activeSong.value.storage_path}`;
   };
   const pauseSong = () => {
     isPlaying.value = false;

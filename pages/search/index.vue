@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Search :songs="useSearchResault" />
+    <Search :songs="useSearchResault" :loading="loading" />
   </div>
 </template>
 
@@ -11,8 +11,11 @@ definePageMeta({
 
 let { getSearchResault, useSearchResault } = useGet();
 
+let loading = ref(false);
+
 onMounted(async () => {
+  loading.value = true;
   await getSearchResault();
-  console.log(useSearchResault.value);
+  loading.value = false;
 });
 </script>

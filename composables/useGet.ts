@@ -7,6 +7,7 @@ export default () => {
   let useSongs = useState<Song[]>("useSongs", () => []);
   let useSearchResault = useState<Song[]>("useSearchResault", () => []);
   let useFavorites = useState<Favorites[]>("useFavorites", () => []);
+  let useSingers = useState<Options[]>("useSingers", () => []);
   let client = useSupabaseClient();
 
   const getSongs = async () => {
@@ -59,8 +60,6 @@ export default () => {
       `
       )
       .eq("user_id", useUser?.value?.id);
-    console.log("favorites", data);
-    console.log(useUser.value);
     useFavorites.value = (data as Favorites[]) || [];
   };
   const onSubscribeFavorites = () => {
@@ -70,7 +69,6 @@ export default () => {
         "postgres_changes",
         { event: "*", schema: "public", table: "favorites" },
         (payload) => {
-          console.log(payload);
           if (payload?.old) {
             useFavorites.value = useFavorites.value?.filter(
               (item: Favorites) => item.id !== payload.old?.id
@@ -111,8 +109,19 @@ export default () => {
     }
   };
 
+  const getSingers = async () => {
+    let { data: artists, error } = await client
+      .from("artists")
+      .select("name,id,songs,image_path");
+    console.log("dataaaaaaaaaaaaa", artists);
+    useSingers.value = artists as Options[];
+    return artists;
+  };
+
   return {
     onSubscribeFavorites,
+    useSingers,
+    getSingers,
     useSearchResault,
     getSearchResault,
     getArtists,

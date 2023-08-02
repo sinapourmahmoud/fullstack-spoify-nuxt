@@ -14,4 +14,5 @@
 </template>
 <script setup lang="ts">
 let { toggleModal, modalType } = useModal();
+let { playList } = useSong();
 </script>

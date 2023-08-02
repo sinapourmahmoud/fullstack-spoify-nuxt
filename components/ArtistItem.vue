@@ -9,11 +9,11 @@
       class="w-12 h-12 object-cover rounded-full"
       alt="profile"
     />
-    <p class="text-gray-500">{{ option?.label }}</p>
+    <p class="text-gray-500">{{ option?.name.split(" ")[0] }}</p>
   </div>
 </template>
 <script setup lang="ts">
-import { Options } from "types";
+import { Options } from "./../types";
 
 interface Props {
   option: Options;

@@ -117,13 +117,11 @@ export default () => {
         .from("favorites")
         .delete()
         .eq("song_id", id);
-      console.log(data);
     } else {
       const { data, error } = await client
         .from("favorites")
         .insert([{ song_id: id, user_id: useUser.value?.id }])
         .select();
-      console.log(data);
     }
   };
 

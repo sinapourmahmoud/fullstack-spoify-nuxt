@@ -7,7 +7,7 @@
       </h1>
 
       <div class="flex flex-col gap-4">
-        <CardsAlbumCard title="After houres" />
+        <CardsAlbumCard :song="songs[0]" />
       </div>
     </div>
     <div class="md:col-span-4 col-span-6 flex flex-col gap-4">

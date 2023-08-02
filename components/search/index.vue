@@ -1,7 +1,8 @@
 <template>
   <div>
     <SearchForm class="justify-center" />
-    <div class="flex flex-col gap-5 mt-14 px-3 md:px-6">
+    <Loading v-show="loading" class="mt-6" />
+    <div class="flex flex-col gap-5 mt-14 px-3 md:px-6" v-show="!loading">
       <CardsMusicCard
         v-for="(song, index) in songs"
         :key="index"
@@ -17,8 +18,8 @@ import { Song } from "types";
 
 interface Props {
   songs: Song[];
+  loading: boolean;
 }
 
-let { songs } = defineProps<Props>();
-console.log(songs);
+let { songs, loading } = defineProps<Props>();
 </script>

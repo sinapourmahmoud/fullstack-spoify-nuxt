@@ -3,7 +3,8 @@
     <div class="min-h-screen flex flex-col gap-8 col-span-4 md:col-span-3">
       <IndexHeader />
       <ArtistsList />
-      <IndexBody :songs="useSongs" />
+      <Loading v-show="loading" />
+      <IndexBody :songs="useSongs" v-show="!loading" />
     </div>
     <div class="col-span-4 md:col-span-1 h-full md:py-0 md:static md:top-0">
       <SidebarRight />
@@ -18,10 +19,12 @@ let client = useSupabaseAuthClient();
 definePageMeta({
   layout: "custom",
 });
-
+let loading = ref(true);
 onMounted(async () => {
+  loading.value = true;
   await getSongs();
 
+  loading.value = false;
   const songs = client
     .channel("custom-all-channel")
     .on(
