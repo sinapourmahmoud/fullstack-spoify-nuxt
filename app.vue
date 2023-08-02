@@ -1,5 +1,4 @@
 <template>
-  <button @click="handleclick">logout</button>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>

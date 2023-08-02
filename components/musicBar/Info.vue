@@ -13,6 +13,7 @@
       </p>
     </div>
     <HeartIcon
+      v-if="useUser"
       @click="handleClick"
       class="w-5 cursor-pointer"
       :class="isFavorite ? 'text-rose-500' : 'text-slate-500'"
@@ -28,6 +29,7 @@ let client = useSupabaseAuthClient();
 let { activeSong, isPlaying } = useSong();
 
 let { addFavorites } = useAddItem();
+let { useUser } = useAuth();
 
 let { getUrl, useFavorites, getFavorites } = useGet();
 

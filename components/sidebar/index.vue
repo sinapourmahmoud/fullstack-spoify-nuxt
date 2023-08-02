@@ -34,6 +34,11 @@
             :class="fullPath === '/favorites' ? 'text-black' : 'text-gray-500'"
           />
         </SidebarItem>
+        <SidebarItem title="Logout" @clicked="handleLogout" v-if="useUser">
+          <ArrowLeftOnRectangleIcon
+            class="w-5 transition-all duration-300 group-hover:text-black"
+          />
+        </SidebarItem>
       </div>
     </div>
   </aside>
@@ -44,9 +49,13 @@ import {
   HomeIcon,
   MagnifyingGlassIcon,
   HeartIcon,
+  ArrowLeftOnRectangleIcon,
 } from "@heroicons/vue/24/outline";
 
 let fullPath = ref(useRoute().fullPath);
+
+let client = useSupabaseClient();
+let { useUser } = useAuth();
 
 watch(
   () => useRoute().fullPath,
@@ -54,4 +63,8 @@ watch(
     fullPath.value = newVal;
   }
 );
+
+const handleLogout = () => {
+  client.auth.signOut();
+};
 </script>

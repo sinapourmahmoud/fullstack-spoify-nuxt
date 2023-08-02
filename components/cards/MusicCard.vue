@@ -15,6 +15,7 @@
     </div>
 
     <HeartIcon
+      v-if="useUser"
       class="w-5"
       @click.capture="handleClick"
       :class="isFavorite ? 'text-rose-400' : 'text-slate-500'"
@@ -40,6 +41,8 @@ let { song, songList } = defineProps<Props>();
 
 let { getUrl } = useGet();
 let { selectSong, pauseSong, activeSong, isPlaying, playSong } = useSong();
+
+let { useUser } = useAuth();
 
 let { addFavorites } = useAddItem();
 

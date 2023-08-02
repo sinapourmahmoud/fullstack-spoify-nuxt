@@ -13,7 +13,6 @@
       >
         Login
       </button>
-      <button @click="logout">logout</button>
     </div>
     <div v-else class="flex items-center gap-3">
       <img
